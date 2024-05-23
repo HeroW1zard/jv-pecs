@@ -1,13 +1,13 @@
 package core.mate.academy.service.enums;
 
 public enum Brand {
-    Caterpillar,
-    Komatsu,
-    Volvo,
-    Hitachi,
-    Liebherr,
-    Bobcat,
+    CATERPILLAR,
+    KOMATSU,
+    VOLVO,
+    HITACHI,
+    LIEBHERR,
+    BOBCAT,
     JCB,
-    Kubota,
-    Terex
+    KUBOTA,
+    TEREX
 }

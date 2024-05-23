@@ -5,7 +5,7 @@ public enum Model {
     PC210LC,
     EC350E,
     ZX470LC,
-    R914_Compact,
+    R914_COMPACT,
     E85,
     TC16,
     U55_4
