@@ -1,51 +1,49 @@
 # jv-pecs
 
-1. У вас есть абстрактный класс Machine и три подкласса: Bulldozer, Excavator и Truck. Не стесняйтесь добавлять в эти классы поля, специфичные для типа.
-
-2. Каждая машина имеет возможность начать работу.
-
-3. Создан интерфейс MachineProducer.
-Целью реализации этого интерфейса является создание списка определенных машин (Bulldozer, Excavator и Truck).
-У вас должно быть как минимум 3 реализации: BulldozerProducer, ExcavatorProducer, TruckProducer.
-Параметризуйте ваш MachineProducer и замените Object в get() на подходящий вариант.
+1. You have the abstract class `Machine` and three sub-classes: `Bulldozer`, `Excavator`, and `Truck`. Feel free to add some type-specific fields to these classes.
+1. Each machine has the ability to start working.
+1. There is a MachineProducer interface created.
+   The goal of the implementation of this interface is to create a list of specific machines (`Bulldozer`, `Excavator`, and `Truck`).
+   You should have at least 3 implementations: `BulldozerProducer`, `ExcavatorProducer`, `TruckProducer`;
+   Please parameterize your `MachineProducer` and replace `Object` in `get()` with the suitable option.
     ```java
     public interface MachineProducer<PARAMETRIZE ME>{ ... }
     ```
-4. В реализациях MachineProducer ваш метод get() должен возвращать список определенных машин.
-   Например:
+1. In `MachineProducer` implementations your method `get()` should return the list of specific machines.
+   For example:
     ```java
     List<Bulldozer> get();
     ```
-    или 
+   or
     ```java
     List<Truck> get();
     ```
-    или 
+   or
     ```java
     List<Excavator> get();
     ```
 
-5. Также создан интерфейс MachineService. Вам нужно его параметризовать и заменить Object в сигнатуре метода на правильный вариант (используйте PECS):
+1. There is also a `MachineService` interface created. You need to parameterize it as well and
+   replace `Object` in the method signature with the right option (use PECS):
 
-- метод getAll(Class type) создает список машин на основе входного параметра.
-- метод fill(List<Object> machines, Object value) заполняет список машин переданным значением.
-- метод startWorking() должен принимать список, содержащий любую машину.
-- Когда вы параметризуете интерфейс MachineService, помните, что мы хотим ограничить типы, которые могут быть использованы с ним.
+   - the method `getAll(Class type)` produces the list of machines based on the input param.
+   - the method `fill(List<Object> machines, Object value)` fills the machines list with passed value.
+   - the method `startWorking()` should be able to accept a list containing any Machine.
 
-Не допускается:
+When you parameterize interface `MachineService` keep in mind that we want to restrict types that can be used with it.
 
+Not allow:  
 ~~`MachineServiceImpl implements MachineService<Dog>`~~  
-
-  Допускается:
-
+Allow:  
 `MachineServiceImpl implements MachineService<Truck>`  
+``
+1. Use the created class `MachineServiceImpl` implementing MachineService and realize these methods:
+- `getAll(Class type)`- based on the input class type, choose the right MachineProducer implementation and call its `get()` method.
 
-1. Используйте созданный класс MachineServiceImpl, реализующий MachineService, и реализуйте эти методы:
-- getAll(Class type) - на основе входного типа класса выберите правильную реализацию MachineProducer и вызовите его метод get().
+For example: `if (type == Bulldozer.class)` - we should call the `get()` method from the right implementation of MachineProducer (the one that will return `List<Bulldozer>`) and return these machines.
 
-Например: if (type == Bulldozer.class) - мы должны вызвать метод get() из правильной реализации MachineProducer (той, которая вернет List<Bulldozer>) и вернуть эти машины.
-- `fill(List<Object> machines, Object value)` - обновите все элементы в списке machines до переданного значения (которое может быть любого подтипа `Machine`).
+- `fill(List<Object> machines, Object value)` - update to the passed value (**which can be of any Machine subtype**) all elements in the `machines` list.
 
-- `startWorking()` - вызовите `doWork` на каждой машине в списке.
+- `startWorking()` - call `doWork` on every Machine in the list.
 
 #### [Try to avoid these common mistakes while solving task](./checklist.md)

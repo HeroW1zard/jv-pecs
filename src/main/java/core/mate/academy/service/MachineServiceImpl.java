@@ -6,13 +6,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class MachineServiceImpl implements MachineService<Machine> {
+    private BulldozerProducer bulldozerProducer = new BulldozerProducer();
+    private ExcavatorProducer excavatorProducer = new ExcavatorProducer();
+    private TruckProducer truckProducer = new TruckProducer();
+
     @Override
     public List<Machine> getAll(Class<? extends Machine> type) {
         List<Machine> machinesList = new ArrayList<>();
         switch (type.getSimpleName()) {
-            case "Bulldozer" -> machinesList.addAll(new BulldozerProducer().get());
-            case "Excavator" -> machinesList.addAll(new ExcavatorProducer().get());
-            case "Truck" -> machinesList.addAll(new TruckProducer().get());
+            case "Bulldozer" -> machinesList.addAll(bulldozerProducer.get());
+            case "Excavator" -> machinesList.addAll(excavatorProducer.get());
+            case "Truck" -> machinesList.addAll(truckProducer.get());
             default -> {
                 return Collections.emptyList();
             }
